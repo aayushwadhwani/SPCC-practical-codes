@@ -107,6 +107,31 @@ class FAF{
 		memo.put(ch, result);
 		return result;
 	}
+
+	public static HashMap<Character, String> LL1(HashMap<Character, Set<Character>> firsts, HashMap<Character, Set<Character>> follows, HashMap<Character, ArrayList<String>> g, Character nt) {
+		HashMap<Character, String> result = new HashMap<>();
+		ArrayList<Character> first = new ArrayList<>(firsts.get(nt));
+		ArrayList<Character> follow = new ArrayList<>(follows.get(nt));
+		ArrayList<String> grammer = g.get(nt);
+		for(Character f: first) {
+			for(String pr: grammer) {
+				char ch = pr.charAt(0);
+				if(ch == f && f != '9') {
+					result.put(f, String.format("%c->%s",nt, pr));
+					break;
+				} else if(Character.isUpperCase(ch)) {
+					if(firsts.get(ch).contains(f)) {
+						result.put(f, String.format("%c->%s",nt,pr));
+					}
+				} else if(ch == '9') {
+					for(Character fo: follow) {
+						result.put(fo, String.format("%c->%s",nt,pr));
+					}
+				}
+			}
+		}
+		return result;
+	} 
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -179,5 +204,9 @@ class FAF{
 		}
 		System.out.println("Follows:");
 		System.out.println(follows);
+		for(char c: nts) {
+			System.out.println(c+ " -> " +LL1(firsts, follows, g, c));
+		}
 	}
 }
+
