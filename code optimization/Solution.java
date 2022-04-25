@@ -19,7 +19,7 @@ class Solution {
 			ArrayList<String> temp = eq.getOrDefault(eqs[1], new ArrayList<String>());
 			temp.add(eqs[0]);
 			eq.put(eqs[1], temp);
-		}
+		} //kon kider kitna
 		System.out.println(eq);
 		String f="";
 		ArrayList<String> ff = new ArrayList<>();
@@ -28,7 +28,7 @@ class Solution {
 				f=rhs;
 				ff=eq.get(rhs);
 			} 
-		}
+		} //sabse bada repeating right side
 		while(ff.size() > 1) {
 			String replaceWith = ff.get(0);
 			for(StringBuilder a: ac) {
